@@ -111,7 +111,7 @@ export function signIn(credentials) {
         request.then(r => {
             dispatch({type: USER.SIGN_IN.SUCCESS, payload: r.data});
         }).catch(e => {
-            dispatch({type: USER.SIGN_IN.FAILURE, payload: e});
+            dispatch({type: USER.SIGN_IN.FAILURE, payload: e.response.data});
         })
     };
 }

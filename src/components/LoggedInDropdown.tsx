@@ -1,15 +1,25 @@
-import React from "react";
-import {Dropdown} from "semantic-ui-react";
+import React, {useState} from "react";
+import {Dropdown, Transition} from "semantic-ui-react";
 import {useSelector} from "react-redux";
 
 export function LoggedInDropdown() {
+  const [isDropdownVisible, setDropdownVisibility] = useState(false);
   const user = useSelector(state => state.user);
-  console.log((user || {}).user.email);
+
   return (
-      <Dropdown text={(user || {}).user.email} pointing={"right"}>
+      <Dropdown text={(user || {}).user.email} pointing={"top left"}
+                onClick={(isDropdownVisible) => {
+                  console.log("soemthing");
+                  setDropdownVisibility(!isDropdownVisible)
+                }}>
         <Dropdown.Menu>
-          <Dropdown.Item text='Settings'/>
-          <Dropdown.Item text='Logout'/>
+          <Transition animation={"scale"} visible={isDropdownVisible}>
+            <Dropdown.Item icon="cog">
+              Settings
+            </Dropdown.Item>
+          </Transition>
+          <Dropdown.Item icon="cog" text='Setting'/>
+          <Dropdown.Item icon="sign-out" text='Logout'/>
         </Dropdown.Menu>
       </Dropdown>
   )

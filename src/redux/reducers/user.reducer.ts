@@ -1,13 +1,23 @@
 import {USER} from "../constants";
 import {setUserToken} from "../actions/users.action";
+import {ServerError} from "../../util/interfaces";
 
-const initialState = {
+export interface UserReducerInterface {
+  userProfile: object,
+  authToken: string,
+  isLoggedIn: boolean,
+  users: [],
+  user: object,
+  error: ServerError
+}
+
+const initialState  = {
     userProfile: {},
     authToken: "",
     isLoggedIn: false,
     users: [],
     user: {},
-    errors: []
+    error: {}
 };
 
 function userReducer(state = initialState, action) {
@@ -32,11 +42,11 @@ function userReducer(state = initialState, action) {
             });
         case USER.GET_MY_PROFILE.FAILURE:
             return Object.assign({}, state, {
-                errors: [...state.errors, action.payload]
+                error: action.payload
             });
         case USER.SIGN_IN.FAILURE:
             return Object.assign({}, state, {
-                errors: [...state.errors, action.payload]
+                error: action.payload
             });
         case USER.SIGN_OUT.SUCCESS:
             return Object.assign({}, initialState, {});

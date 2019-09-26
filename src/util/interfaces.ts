@@ -9,3 +9,8 @@ export interface NavigationItemProps {
 
 export interface NavigationItems extends Array<NavigationItemProps>{
 }
+
+export interface ServerError {
+  title: string,
+  message: string
+}

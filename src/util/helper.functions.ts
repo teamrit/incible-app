@@ -74,3 +74,8 @@ export const highlightNavigationItem = (href,page) => {
     const part = (page.split("/"))[1];
     return `/${part}` === href || `/${part}s` === href;
 };
+
+
+export const getLastIndexItem : any = (arg: [any]) => {
+    return arg[arg.length - 1] || {};
+};
