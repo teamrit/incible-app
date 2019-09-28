@@ -2,6 +2,8 @@ import axios from "axios";
 import {USER, INCIDENT, HTTP_METHOD} from "../constants";
 import {resolveHost, stringifyRequest} from "../../util/helper.functions";
 import {deleteAuthorized, getAuthorized, postAuthorized, putAuthorized} from "../request.handler";
+import {get} from "lodash";
+
 
 /**
  *
@@ -84,17 +86,6 @@ export function changeUserField({key,value}) {
     };
 }
 
-export function signUpUser(user) {
-    return (dispatch, getState) => {
-        const request = axios.post(resolveHost("/user/register"), user);
-        request.then(({ data }) => {
-            dispatch({ type: USER.SIGN_UP.SUCCESS, payload: data });
-        }).catch(e => {
-            dispatch({ type: USER.SIGN_UP.FAILURE, payload: e });
-        });
-    };
-}
-
 export function logout() {
     return (dispatch, getState) => {
         resetUserToken();
@@ -111,9 +102,21 @@ export function signIn(credentials) {
         request.then(r => {
             dispatch({type: USER.SIGN_IN.SUCCESS, payload: r.data});
         }).catch(e => {
-            dispatch({type: USER.SIGN_IN.FAILURE, payload: e.response.data});
+            dispatch({type: USER.SIGN_IN.FAILURE, payload: get(e,'response.data')});
         })
     };
+}
+
+export function signUp(credentials) {
+  return (dispatch, getState) => {
+    const request = axios.post(resolveHost("/signup"), credentials);
+    request.then(r => {
+      dispatch({type: USER.SIGN_UP.SUCCESS, payload: r.data});
+    }).catch(e => {
+      console.log(e);
+      dispatch({type: USER.SIGN_UP.FAILURE, payload: e.response.data});
+    })
+  };
 }
 
 export function resetUserToken() {

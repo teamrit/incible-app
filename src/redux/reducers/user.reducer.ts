@@ -36,6 +36,10 @@ function userReducer(state = initialState, action) {
                 authToken: response.token,
                 isLoggedIn: true
             });
+      case USER.SIGN_UP.FAILURE:
+        return Object.assign({}, state, {
+          error: action.payload
+        });
         case USER.GET_MY_PROFILE.SUCCESS:
             return Object.assign({}, state, {
                 userProfile: action.payload
