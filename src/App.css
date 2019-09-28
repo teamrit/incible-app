@@ -46,3 +46,55 @@ a {
   text-decoration: none;
   color: white;
 }
+.mh-body {
+  min-height: calc(100vh - 100px);
+}
+@font-face {
+  font-family: Circular;
+  src: url('https://sp-bootstrap.global.ssl.fastly.net/8.9.0/fonts/circular-light.woff2') format('woff2'), url('https://sp-bootstrap.global.ssl.fastly.net/8.9.0/fonts/circular-light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: CircularBold;
+  src: url('https://sp-bootstrap.global.ssl.fastly.net/8.2.4/fonts/circular-bold.woff2') format('woff2'), url('https://sp-bootstrap.global.ssl.fastly.net/8.2.4/fonts/circular-bold.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+}
+*:not(i){
+  font-family: Circular, 'Quicksand', sans-serif !important;
+  font-weight: 700 !important;
+}
+.alert-enter {
+  opacity: 0;
+  transform: scale(0.9);
+  background-color: yellow;
+}
+.alert-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 3000ms, transform 3000ms;
+  background-color: red;
+}
+.alert-enter-appear {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 3000ms, transform 3000ms;
+  background-color: red;
+}
+.alert-exit {
+  opacity: 1;
+}
+.alert-exit-active {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 300ms, transform 300ms;
+}
+@keyframes scale {
+  0% {transform: scale(1)}
+  50% {transform: scale(1.1)}
+  100% {transform: scale(1)}
+}
+.animate.scale {
+  animation: scale 2s infinite;
+}
