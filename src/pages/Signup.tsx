@@ -44,13 +44,13 @@ export const SignupStage = ({stage}) => {
 
 export function SignupStep({current = 1, stage = 1}) {
   return (
-      <Grid.Column>
-        <Segment style={{marginBottom:'1em'}} className={current === stage ? "tx-white bg-purp animate scale" : ""}>
-          <Header size="large" color={current === stage ? "yellow" : "black"}>
-            {stage}
-          </Header>
-        </Segment>
-      </Grid.Column>
+    <Grid.Column>
+      <Segment style={{marginBottom:'1em'}} className={current === stage ? "tx-white bg-purp animate scale" : ""}>
+        <Header size="large" color={current === stage ? "yellow" : "black"}>
+          {stage}
+        </Header>
+      </Segment>
+    </Grid.Column>
   );
 }
 
