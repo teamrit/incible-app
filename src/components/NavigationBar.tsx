@@ -11,15 +11,42 @@ const navigationItems: NavigationItems = [
   {url: "/incidents", label: "Incidents"}
 ];
 
+export const RightNavigationItem = ({isLoggedIn, fixed}) => {
+  if (!isLoggedIn)
+    return (<>
+      <Menu.Item position='right'>
+        <Link to="/login">
+          <Button as='div'>
+            <Header color="black" size="small">
+              Log in
+            </Header>
+          </Button>
+        </Link>
+        <Link to="/signup">
+          <Button as='div' inverted={!fixed} primary={fixed} style={{marginLeft: '0.5em'}}>
+            <Header color="yellow" size="small">
+              Sign up
+            </Header>
+          </Button>
+        </Link>
+      </Menu.Item>
+    </>);
+  else {
+    return (<Menu.Item position='right'>
+      <LoggedInDropdown/>
+    </Menu.Item>);
+  }
+};
+
 export const NavigationItem = (props: NavigationItemProps) => {
   return (
-    <Link to={props.url}>
-      <Button as='div' inverted={!props.inverted}>
-      <Header color="black" size="small">
-        {props.label}
-      </Header>
-      </Button>
-    </Link>
+      <Link to={props.url}>
+        <Button as='div' inverted={!props.inverted}>
+          <Header color="black" size="small">
+            {props.label}
+          </Header>
+        </Button>
+      </Link>
   );
 };
 
@@ -40,16 +67,16 @@ export const NavigationBar: React.FC = (props) => {
           onBottomPassedReverse={() => setFixation(false)}
       >
         <Segment
-          inverted
-          textAlign='center'
-          vertical
+            inverted
+            textAlign='center'
+            vertical
         >
           <Menu
-            fixed={fixed ? 'top' : undefined}
-            inverted={!fixed}
-            pointing={!fixed}
-            secondary={!fixed}
-            size='large'
+              fixed={fixed ? 'top' : undefined}
+              inverted={!fixed}
+              pointing={!fixed}
+              secondary={!fixed}
+              size='large'
           >
             <Container>
 
@@ -70,36 +97,14 @@ export const NavigationBar: React.FC = (props) => {
                 ))}
                   </Menu.Item>
 
-                {!isLoggedIn ? (
-                  <>
-                  <Menu.Item position='right'>
-                  <Link to="/login">
-                  <Button as='div'>
-                  <Header color="black" size="small">
-                  Log in
-                  </Header>
-                  </Button>
-                  </Link>
-                  <Link to="/login">
-                  <Button as='div' inverted={!fixed} primary={fixed} style={{marginLeft: '0.5em'}}>
-                  <Link to="/signup">
-                  <Header color="yellow" size="small">
-                  Sign up
-                  </Header>
-                  </Link>
-                  </Button>
-                  </Link>
-                  </Menu.Item>
-                  </>
-                  ) : (<Menu.Item position='right'>
-                  <LoggedInDropdown />
-                  </Menu.Item>)}
+                  <RightNavigationItem isLoggedIn={isLoggedIn} fixed={fixed} />
 
                   </Container>
                   </Menu>
                   </Segment>
                   </Visibility>
                   </Transition>
-                  </Responsive>);
+                  </Responsive>
+                  );
                 };
 

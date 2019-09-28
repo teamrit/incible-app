@@ -1,6 +1,19 @@
 import React, {useState} from "react";
-import {Dropdown, Transition} from "semantic-ui-react";
+import {Dropdown, Header, Icon, Transition} from "semantic-ui-react";
 import {useSelector} from "react-redux";
+import {Link} from "react-router-dom";
+
+export function DropdownItem ({icon, to, color, label}) {
+  // TODO: No hover effects!
+  return (
+        <Link to={to}>
+      <Dropdown.Item>
+          <Icon name={icon} color="black"/>
+          <span className="text" style={{color:'black'}}>{label}</span>
+      </Dropdown.Item>
+        </Link>
+  )
+}
 
 export function LoggedInDropdown() {
   const [isDropdownVisible, setDropdownVisibility] = useState(false);
@@ -18,8 +31,27 @@ export function LoggedInDropdown() {
               Settings
             </Dropdown.Item>
           </Transition>
-          <Dropdown.Item icon="cog" text='Setting'/>
-          <Dropdown.Item icon="sign-out" text='Logout'/>
+
+          <DropdownItem
+            to={"/profile"}
+            icon={"user"}
+            color={"black"}
+            label={"My Profile"}
+          />
+
+          <DropdownItem
+              to={"/settings"}
+              icon={"cog"}
+              color={"black"}
+              label={"Settings"}
+          />
+
+          <DropdownItem
+              to={"/sign-out"}
+              icon={"sign-out"}
+              color={"black"}
+              label={"Logout"}
+          />
         </Dropdown.Menu>
       </Dropdown>
   )

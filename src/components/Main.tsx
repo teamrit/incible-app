@@ -6,6 +6,7 @@ import {Signup} from "../pages/Signup";
 import {Login} from "../pages/Login";
 import LandingPage from "../pages/LandingPage";
 import {IncidentsPage} from "../pages/IncidentsPage";
+import {UserProfile} from "../pages/UserProfile";
 
 
 export const Main: React.FC = () => {
@@ -14,6 +15,8 @@ export const Main: React.FC = () => {
       <NavigationBar />
       <Route path="/" exact component={LandingPage} />
       <Route path="/signup" component={Signup}/>
+      <Route path="/signup/:stage" component={Signup}/>
+      <Route path="/profile" component={UserProfile}/>
       <Route path="/login" component={Login}/>
       <Route path="/incidents" component={IncidentsPage}/>
     </Router>
